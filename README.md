@@ -1,7 +1,7 @@
 # **Système IoT de Suivi Cardiaque**
 
 ## **Introduction**
-Le projet présente une solution connectée pour surveiller en temps réel les données cardiaques. Ce système repose sur une carte **Arduino Leonardo** équipée d'un capteur **ECG**, et utilise la connectivité **LoRaWAN** via **The Things Network (TTN)** pour transmettre les données. Ces informations sont ensuite affichées sur un tableau de bord **Node-RED** et enregistrées dans une base de données **PostgreSQL** pour un suivi médical.
+Le projet présente une solution connectée pour surveiller en temps réel les données cardiaques. Ce système repose sur deux cartes **Arduino** (Leonardo et Uno), un capteur **ECG**, et utilise la connectivité **LoRaWAN** via **The Things Network (TTN)** pour transmettre les données. Ces informations sont ensuite affichées sur un tableau de bord **Node-RED** et enregistrées dans une base de données **PostgreSQL** pour un suivi médical.
 
 ## **Étapes d'installation**
 
@@ -9,13 +9,14 @@ Le projet présente une solution connectée pour surveiller en temps réel les d
 
 #### **Matériel nécessaire**
 - Carte **Arduino Leonardo**
+- Carte **Arduino Uno**
 - Capteur **ECG AD8232**
 - Module **LoRa** (ex. RFM95)
 - Passerelle **LoRaWAN**
 - Ordinateur ou **Raspberry Pi** pour exécuter **Node-RED** et **PostgreSQL**
 
 #### **Logiciels requis**
-- **Arduino IDE** pour programmer l'Arduino
+- **Arduino IDE** pour programmer les Arduinos
 - **Node-RED** pour le traitement des données
 - **PostgreSQL** pour le stockage
 - Compte **TTN** pour la gestion LoRaWAN
@@ -28,10 +29,16 @@ Clonez le dépôt GitHub :
 git clone https://github.com/EddyEsposito/ECG.git
 ```
 
-#### **Configuration de l'Arduino**
-1. Ouvrez `ecg_data_logger.ino` dans l'**IDE Arduino**.
-2. Branchez le capteur **ECG** et le module **LoRa** selon le schéma fourni.
-3. Téléversez le code sur l'**Arduino Leonardo**.
+#### **Configuration des Arduinos**
+1. **Pour la simulation des signaux** :
+   - Ouvrez `heart_rate_simulation.ino` dans l'**IDE Arduino**.
+   - Connectez l'**Arduino Uno** et le matériel nécessaire (simulateur de signal).
+   - Téléversez le code sur l'**Arduino Uno**.
+
+2. **Pour la transmission des données** :
+   - Ouvrez `heart_rate_notification.ino` dans l'**IDE Arduino**.
+   - Branchez le capteur **ECG** et le module **LoRa** à l'**Arduino Leonardo** selon le schéma fourni.
+   - Téléversez le code sur l'**Arduino Leonardo**.
 
 #### **Configuration sur TTN**
 1. Créez une application sur **TTN**.
@@ -41,10 +48,9 @@ git clone https://github.com/EddyEsposito/ECG.git
 ### **3. Installation des outils logiciels**
 
 #### **Installation de Node-RED**
-1. Installez **Node-RED** :
+1. Installez **Node-RED** via le script officiel :
    ```bash
-   sudo apt update && sudo apt install -y nodejs npm
-   sudo npm install -g --unsafe-perm node-red
+   curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/install.sh | bash
    ```
 2. Démarrez **Node-RED** :
    ```bash
@@ -71,8 +77,9 @@ git clone https://github.com/EddyEsposito/ECG.git
 ## **Fonctionnalités**
 
 1. **Acquisition et envoi des données**
-   - Lecture des signaux **ECG** et calcul des **BPM** via **Arduino**.
+   - Lecture des signaux **ECG** et calcul des **BPM** via **Arduino Leonardo**.
    - Transmission des données via **LoRaWAN** vers **TTN**.
+   - Simulation des signaux cardiaques via **Arduino Uno** pour des tests.
 
 2. **Tableau de bord interactif**
    - Visualisation en temps réel des données **BPM** avec **Node-RED**.
@@ -85,8 +92,11 @@ git clone https://github.com/EddyEsposito/ECG.git
 
 ## **Organisation des fichiers**
 
-### `ecg_data_logger.ino`
-Code pour capturer et transmettre les données **ECG**.
+### `heart_rate_simulation.ino`
+Code pour simuler des données **ECG** sur l'**Arduino Uno**.
+
+### `heart_rate_notification.ino`
+Code pour capturer et transmettre les données **ECG** via l'**Arduino Leonardo**.
 
 ### `dashboard_flows.json`
 Configuration des flux **Node-RED** pour la gestion des données et leur affichage.
