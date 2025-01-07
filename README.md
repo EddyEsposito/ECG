@@ -56,7 +56,7 @@ git clone https://github.com/EddyEsposito/ECG.git
    ```bash
    node-red
    ```
-3. Importez le fichier `dashboard_flows.json` pour configurer les flux.
+3. Importez le fichier `flows.json` pour configurer les flux.
 
 #### **Configuration de PostgreSQL**
 1. Installez **PostgreSQL** :
