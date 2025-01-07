@@ -25,7 +25,7 @@ Le projet présente une solution connectée pour surveiller en temps réel les d
 #### **Récupération des fichiers**
 Clonez le dépôt GitHub :
 ```bash
-git clone https://github.com/votre_utilisateur/projet-monitoring-cardiaque.git
+git clone https://github.com/EddyEsposito/ECG.git
 ```
 
 #### **Configuration de l'Arduino**
