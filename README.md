@@ -65,12 +65,11 @@ git clone https://github.com/EddyEsposito/ECG.git
    ```
 2. Créez une base et une table pour stocker les données :
    ```sql
-   CREATE DATABASE monitoring;
-   CREATE TABLE heart_data (
-       id SERIAL PRIMARY KEY,
-       timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-       bpm INT NOT NULL
-   );
+      CREATE TABLE bpm_data(
+          id SERIAL PRIMARY KEY,
+          timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          bpm INTEGER
+      );
    ```
 3. Configurez **Node-RED** pour insérer automatiquement les données dans **PostgreSQL**.
 
@@ -101,12 +100,5 @@ Code pour capturer et transmettre les données **ECG** via l'**Arduino Leonardo*
 ### `dashboard_flows.json`
 Configuration des flux **Node-RED** pour la gestion des données et leur affichage.
 
-## **Améliorations possibles**
 
-- Développement d'une application mobile pour consulter les données à distance.
-- Intégration de capteurs supplémentaires (température, SPO2).
-- Mise en œuvre d'algorithmes prédictifs pour détecter les anomalies cardiaques.
-
-## **Contributions**
-Vous avez des idées pour améliorer ce projet ? Soumettez vos suggestions via une **issue** ou une **pull request** sur le dépôt GitHub.
 
